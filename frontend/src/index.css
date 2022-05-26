@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Prata&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .sidebar-item {
+        @apply select-none my-4 mx-2 hover:bg-primary rounded-md 
+        hover:font-bold hover:text-black text-black 
+        dark:text-white p-2 font-noto;
+    }
+}
