@@ -1,7 +1,7 @@
 import type { Component } from 'solid-js';
 
 const MyProfile: Component = () => {
-	return <div>Home</div>;
+	return <div>mProfile</div>;
 };
 
 export default MyProfile;

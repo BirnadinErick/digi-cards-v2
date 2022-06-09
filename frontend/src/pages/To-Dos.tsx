@@ -1,7 +1,7 @@
 import type { Component } from 'solid-js';
 
 const ToDos: Component = () => {
-	return <div>Home</div>;
+	return <div>todos</div>;
 };
 
 export default ToDos;

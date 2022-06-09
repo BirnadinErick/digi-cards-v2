@@ -16,7 +16,7 @@ const App: Component = () => {
 	return (
 		<>
 			<Navbar />
-			<div class='flex justify-start'>
+			<div class='flex justify-start bg-base-300'>
 				<Sidebar />
 				<div class='p-2 w-screen bg-base-200'>
 					<Routes>
@@ -29,6 +29,17 @@ const App: Component = () => {
 					</Routes>
 				</div>
 			</div>
+
+			<footer class='footer footer-center p-10 bg-base-300 text-white rounded'>
+				<div class='grid grid-flow-col gap-4'>
+					<a class='link link-hover'>About us</a>
+					<a class='link link-hover'>Contact</a>
+				</div>
+
+				<div>
+					<p>Copyright © 2022 - Birnadin Erick and Eric Praveen</p>
+				</div>
+			</footer>
 		</>
 	);
 };
