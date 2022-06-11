@@ -37,7 +37,7 @@ const App: Component = () => {
 				</div>
 
 				<div>
-					<p>Copyright © 2022 - Birnadin Erick and Eric Praveen</p>
+					<p>Copyright © 2022 - Birnadin Erick</p>
 				</div>
 			</footer>
 		</>

@@ -1,12 +1,18 @@
 import { Component, createSignal } from 'solid-js';
 
-const [answer, setAnswer] = createSignal(0);
+const [answer, setAnswer] = createSignal(-1);
+const [seconds, setSeconds] = createSignal(2);
 
 function onClickAnswer(id: number) {
 	setAnswer(id);
 }
 
 const Deques: Component = () => {
+	// ! uncomment after ui design for coutdown functionality
+	// setInterval(() => {
+	// 	setSeconds(seconds() - 1);
+	// }, 1000);
+
 	return (
 		<div class='flex justify-between'>
 			<div class='mx-8 my-2 bg-base-300 p-8 w-3/5 rounded-lg'>
@@ -22,19 +28,10 @@ const Deques: Component = () => {
 					architecto officia sint rerum
 				</p>
 
-				<p class='underline cursor-default font-mono'>Choose an answer:</p>
-
-				<div
-					class='my-4 p-4 bg-secondary rounded-lg hover:bg-primary cursor-pointer'
-					onClick={() => {
-						onClickAnswer(0);
-					}}
-				>
-					<p class='text-justify text-black text-md font-sans'>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-						recusandae officiis minima pariatur corporis
-					</p>
-				</div>
+				<p class='cursor-default font-mono'>
+					You chose:
+					{answer() === -1 ? 'Nothing, Please choose an answer!' : answer()}
+				</p>
 
 				<div
 					class='my-4 p-4 bg-secondary rounded-lg hover:bg-primary cursor-pointer'
@@ -47,6 +44,7 @@ const Deques: Component = () => {
 						recusandae officiis minima pariatur corporis
 					</p>
 				</div>
+
 				<div
 					class='my-4 p-4 bg-secondary rounded-lg hover:bg-primary cursor-pointer'
 					onClick={() => {
@@ -80,13 +78,26 @@ const Deques: Component = () => {
 						recusandae officiis minima pariatur corporis
 					</p>
 				</div>
+				<div
+					class='my-4 p-4 bg-secondary rounded-lg hover:bg-primary cursor-pointer'
+					onClick={() => {
+						onClickAnswer(5);
+					}}
+				>
+					<p class='text-justify text-black text-md font-sans'>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+						recusandae officiis minima pariatur corporis
+					</p>
+				</div>
 			</div>
 			<div class='mx-8 my-2 w-2/5'>
 				<div class='mb-2 bg-base-300 rounded-lg p-8 cursor-default'>
 					<h1 class='text-2xl uppercase text-accent font-serif'>Deque info</h1>
 
 					<div class='py-4'>
-						<h3 class='my-2 font-mono text-primary'>by: Birnadin E.</h3>
+						<h3 class='my-2 font-mono text-primary hover:underline'>
+							by: <a href='#'>Birnadin E.</a>
+						</h3>
 						<h3 class='my-2 font-mono text-secondary'>category: mathematics</h3>
 						<h3 class='my-2 font-mono text-error font-bold'>sidenote: lorem</h3>
 						<h3 class='my-2 font-mono text-info'>
@@ -102,6 +113,10 @@ const Deques: Component = () => {
 						<p class='font-bold font-serif font-2xl text-center text-black'>
 							2 of 7 Cards Answered
 						</p>
+					</div>
+
+					<div>
+						<p>{new Date(seconds() * 1000).toISOString().substring(11, 19)}</p>
 					</div>
 				</div>
 			</div>
