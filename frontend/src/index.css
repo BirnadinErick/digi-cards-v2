@@ -10,4 +10,7 @@
         hover:font-bold hover:text-black text-black 
         dark:text-white p-2 font-noto;
     }
+.deque-action-btn {
+    @apply my-4 rounded-xl cursor-pointer p-2 text-black text-xl text-center font-noto;
+}
 }
