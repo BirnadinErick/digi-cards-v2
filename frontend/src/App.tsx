@@ -6,6 +6,7 @@ const Home = lazy(() => import('./pages/Home'));
 const MyProfile = lazy(() => import('./pages/My-Profile'));
 const MyTeam = lazy(() => import('./pages/My-Team'));
 const Deques = lazy(() => import('./pages/Deques'));
+const Deque = lazy(() => import('./pages/Deque'));
 const ToDos = lazy(() => import('./pages/To-Dos'));
 const Starred = lazy(() => import('./pages/Starred'));
 // ? Components import
@@ -24,6 +25,7 @@ const App: Component = () => {
 						<Route path='/my-profile' element={<MyProfile />} />
 						<Route path='/my-team' element={<MyTeam />} />
 						<Route path='/deques' element={<Deques />} />
+						<Route path='/deque' element={<Deque />} />
 						<Route path='/todos' element={<ToDos />} />
 						<Route path='/starred' element={<Starred />} />
 					</Routes>
