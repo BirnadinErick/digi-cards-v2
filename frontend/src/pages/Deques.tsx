@@ -9,7 +9,7 @@ const Deques: Component = () => {
 		<>
 			<div class='mt-4 ml-4 mr-8 mb-4 invisible md:visible'>
 				<div class='bg-base-300 h-64 rounded-xl mb-4 p-8 '>
-					<h1 class='text-4xl font-prata mb-4 text-white underline'>
+					<h1 class='text-4xl font-prata mb-4 text-black dark:text-white underline'>
 						Hey There 👋
 					</h1>
 					<h3 class='text-xl font-sans italic text-secondary my-4'>
@@ -19,20 +19,26 @@ const Deques: Component = () => {
 					<p class='font-noto text-md text-accent'>
 						Choose a deque and try to finish it within time limit. First one to
 						finish in global range to claim{' '}
-						<span class='italic font-bold font-mono text-white'>
+						<span class='italic font-bold font-mono text-black dark:text-white'>
 							first-blood
 						</span>{' '}
 						and finish somehow 😅 to get{' '}
-						<span class='italic font-bold font-mono text-white'>
+						<span class='italic font-bold font-mono text-black dark:text-white'>
 							deque-master
 						</span>{' '}
 						achievements
 					</p>
 
 					<div class='my-8'>
-						<div class='mr-4 btn btn-primary'>Global Leaderboard 📈</div>
-						<div class='mr-4 btn btn-secondary'>Your Achievements 🎓</div>
-						<div class='btn btn-accent'>Pinned Deques 📌</div>
+						<div class='mr-4 btn btn-primary hover:scale-105 transition duration-200 ease-out'>
+							Global Leaderboard 📈
+						</div>
+						<div class='mr-4 btn btn-secondary hover:scale-105 transition duration-200 ease-out'>
+							Your Achievements 🎓
+						</div>
+						<div class='btn btn-accent hover:scale-105 transition duration-200 ease-out'>
+							Pinned Deques 📌
+						</div>
 					</div>
 				</div>
 			</div>
@@ -50,7 +56,7 @@ const Deques: Component = () => {
 						>
 							{(i) => {
 								return (
-									<div class='card w-96 mr-4 mb-8 bg-black shadow-xl cursor-default'>
+									<div class='card w-96 mr-4 mb-8 bg-white dark:bg-black shadow-xl cursor-default'>
 										<figure>
 											<img
 												class='hover:scale-105 transition duration-300 ease-in-out'
@@ -76,7 +82,7 @@ const Deques: Component = () => {
 											</div>
 										</div>
 										<div class='card-actions justify-start'>
-											<Link href='/deque'>
+											<Link href='/deque/:1'>
 												<div class='btn btn-warning mb-4 ml-8 hover:scale-105 transition duration-200 ease-out hover:bg-white'>
 													Play Deque
 												</div>

@@ -1,17 +1,13 @@
 import { Component, lazy } from 'solid-js';
+import DequeCardThumb from '../assets/deque_thumb_2.jpg';
 const Answer = lazy(() => import('../components/Answer'));
 
 const Card: Component<{ answer: Function; onClickAnswer: Function }> = (
 	props
 ) => {
 	return (
-		<div class='mx-8 my-2 bg-base-300 p-8 w-3/5 rounded-lg'>
-			<img
-				src={
-					'https://unsplash.com/photos/PkiHF-EeT6o/download?ixid=MnwxMjA3fDB8MXxhbGx8M3x8fHx8fDJ8fDE2NTQ0MjUwMjM&force=true&w=640'
-				}
-				alt='card-image'
-			/>
+		<div class='mx-8 my-2 bg-base-300 p-8 w-auto h-auto rounded-lg'>
+			<img src={DequeCardThumb} alt='card-image' />
 
 			<p class='mt-8 mb-4 cursor-default font-prata text-lg'>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe iste

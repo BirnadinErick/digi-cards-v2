@@ -1,4 +1,4 @@
-import { Component, createSignal } from 'solid-js';
+import { Component } from 'solid-js';
 
 const Answer: Component<{
 	aid: number;
@@ -12,7 +12,9 @@ const Answer: Component<{
 				props.onClickAnswer(props.aid);
 			}}
 		>
-			<p class='text-justify text-black text-md font-sans'>{props.answer}</p>
+			<p class='text-justify dark:text-black text-md text-white font-sans'>
+				{props.answer}
+			</p>
 		</div>
 	);
 };

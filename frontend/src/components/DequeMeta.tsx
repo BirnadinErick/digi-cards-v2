@@ -11,7 +11,7 @@ const DequeMeta: Component = () => {
 				</h3>
 				<h3 class='my-2 font-mono text-secondary'>category: mathematics</h3>
 				<h3 class='my-2 font-mono text-error font-bold'>sidenote: lorem</h3>
-				<h3 class='my-2 font-mono text-info'>
+				<h3 class='my-2 font-mono text-error dark:text-info'>
 					deque master:
 					<a href='#' class='text-bold hover:underline'>
 						Birnadin E.
