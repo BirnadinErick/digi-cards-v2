@@ -1,7 +1,8 @@
 import type { Component } from 'solid-js';
+import ComingSoonBanner from '../components/ComingSoonBanner';
 
 const Starred: Component = () => {
-	return <div>starred</div>;
+	return <ComingSoonBanner />;
 };
 
 export default Starred;
