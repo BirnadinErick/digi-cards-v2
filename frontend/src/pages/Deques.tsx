@@ -31,13 +31,13 @@ const Deques: Component = () => {
 
 					<div class='my-8'>
 						<div class='mr-4 btn btn-primary hover:scale-105 transition duration-200 ease-out'>
-							Global Leaderboard 📈
+							<Link href='/my-profile'>Global Leaderboard 📈</Link>
 						</div>
 						<div class='mr-4 btn btn-secondary hover:scale-105 transition duration-200 ease-out'>
-							Your Achievements 🎓
+							<Link href='/my-profile'>Your Achievements 🎓</Link>
 						</div>
 						<div class='btn btn-accent hover:scale-105 transition duration-200 ease-out'>
-							Pinned Deques 📌
+							<Link href='/todos'>Pinned Deques 📌</Link>
 						</div>
 					</div>
 				</div>
@@ -45,11 +45,7 @@ const Deques: Component = () => {
 			<section class='overflow-hidden'>
 				<div class='container py-2 lg:pt-12 lg:px-32'>
 					<div class='flex flex-wrap -m-1 md:-m-2'>
-						<For
-							each={[
-								1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-							]}
-						>
+						<For each={[1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]}>
 							{(i) => {
 								return (
 									<div class='card w-96 mr-4 mb-8 bg-white dark:bg-black shadow-xl cursor-default'>

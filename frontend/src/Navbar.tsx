@@ -1,3 +1,4 @@
+import { Link } from 'solid-app-router';
 import { Component } from 'solid-js';
 import UserAvatar from './components/UserAvatar';
 
@@ -5,7 +6,9 @@ const Navbar: Component = () => {
 	return (
 		<div class='navbar bg-base-300'>
 			<div class='flex-1'>
-				<a class='btn btn-ghost normal-case text-xl font-prata'>Digi-Cards</a>
+				<Link href='/'>
+					<a class='btn btn-ghost normal-case text-xl font-prata'>Digi-Cards</a>
+				</Link>
 			</div>
 			<div class='flex-none gap-4'>
 				<div class='form-control'>
@@ -17,9 +20,6 @@ const Navbar: Component = () => {
 				</div>
 				<div class='dropdown dropdown-end mr-2'>
 					<label tabindex='0' class='btn btn-ghost btn-circle avatar'>
-						{/* <div class="w-10 rounded-full">
-                        <img src="https://api.lorem.space/image/pizza?hash=33791" />
-                    </div> */}
 						<UserAvatar w={10} m={0} />
 					</label>
 					<ul
@@ -27,7 +27,9 @@ const Navbar: Component = () => {
 						class='mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52'
 					>
 						<li>
-							<a class='justify-between'>Profile</a>
+							<Link href='/my-profile'>
+								<a class='justify-between'>Profile</a>
+							</Link>
 						</li>
 						<li>
 							<a>Settings</a>
