@@ -8,7 +8,7 @@ const Navbar: Component = () => {
         </div>
         <div class="flex-none gap-4">
             <div class="form-control">
-                <input type="text" placeholder="Search" class="input input-bordered" />
+                <input type="text" placeholder="Search" class="input input-bordered invisible md:visible" />
             </div>
             <div class="dropdown dropdown-end mr-2">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar">

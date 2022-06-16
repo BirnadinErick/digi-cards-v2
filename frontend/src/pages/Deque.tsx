@@ -1,3 +1,4 @@
+import { useParams } from 'solid-app-router';
 import { Component, createSignal, lazy } from 'solid-js';
 
 // components
@@ -15,6 +16,9 @@ function onClickAnswer(id: number) {
 }
 
 const Deque: Component = () => {
+	const params = useParams();
+	console.log(params.id);
+	
 	return (
 		<div class='flex justify-between'>
 			<Card answer={answer} onClickAnswer={onClickAnswer} />

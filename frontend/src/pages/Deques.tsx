@@ -47,11 +47,7 @@ const Deques: Component = () => {
 					<div class='flex flex-wrap -m-1 md:-m-2'>
 						<For
 							each={[
-								1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-
-								1, 2, 3, 4,
-
-								1, 2, 3, 4,
+								1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 							]}
 						>
 							{(i) => {
@@ -82,7 +78,7 @@ const Deques: Component = () => {
 											</div>
 										</div>
 										<div class='card-actions justify-start'>
-											<Link href='/deque/:1'>
+											<Link href={`/deque/${i}`}>
 												<div class='btn btn-warning mb-4 ml-8 hover:scale-105 transition duration-200 ease-out hover:bg-white'>
 													Play Deque
 												</div>
