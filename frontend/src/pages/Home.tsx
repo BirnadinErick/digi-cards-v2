@@ -46,9 +46,11 @@ const Home: Component = () => {
                 ></path>
               </svg>
             </div>
-            <div class=" text-black dark:text-white font-mono">Total Likes</div>
+            <div class=" text-black dark:text-white font-mono">
+              Total Respect
+            </div>
             <div class="stat-value text-primary">25.6K</div>
-            <div class="stat-desc">21% more than last month</div>
+            <div class="stat-desc">Have a nice day</div>
           </div>
 
           <div class="stat">
@@ -67,7 +69,7 @@ const Home: Component = () => {
                 ></path>
               </svg>
             </div>
-            <div class="text-black dark:text-white font-mono">Page Views</div>
+            <div class="text-black dark:text-white font-mono"></div>
             <div class="stat-value text-secondary">2.6M</div>
             <div class="stat-desc">21% more than last month</div>
           </div>
