@@ -1,0 +1,1 @@
+& d:/digi-cards-v2/backend/.env/Scripts/Activate.ps1
