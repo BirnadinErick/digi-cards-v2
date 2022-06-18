@@ -1,9 +1,11 @@
-from django.urls import path
-from api.views import DequeList, DequeDetail, UserDetail, UserList
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from api.views import UserViewSet, DequeViewSet
+
+router = DefaultRouter()
+router.register(r'deques', DequeViewSet, basename="deques")
+router.register(r'users', UserViewSet, basename="users")
 
 urlpatterns = [
-    path('deques/', DequeList.as_view()),
-    path('deques/<int:pk>/', DequeDetail.as_view()),
-    path('users/', UserList.as_view()),
-    path('users/<int:pk>/', UserDetail.as_view()),
+    path('', include(router.urls)),
 ]
