@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,4 +88,10 @@ APPEND_SLASH = True
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ['knox.auth.TokenAuthentication']
+}
+
+REST_KNOX = {
+  'AUTH_TOKEN_CHARACTER_LENGTH': 32,
+  'TOKEN_TTL': timedelta(hours=3),
+  'AUTH_HEADER_PREFIX': 'T',
 }
