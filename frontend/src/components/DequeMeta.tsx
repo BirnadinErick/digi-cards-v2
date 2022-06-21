@@ -3,7 +3,7 @@ import { Component } from 'solid-js';
 const DequeMeta: Component = () => {
 	return (
 		<div class='mb-2 bg-base-300 rounded-lg p-8 cursor-default'>
-			<h1 class='text-2xl uppercase text-accent font-serif'>Deque info</h1>
+			<h1 class='text-2xl uppercase text-accent font-prata'>Deque info</h1>
 
 			<div class='py-4'>
 				<h3 class='my-2 font-mono text-primary hover:underline'>
