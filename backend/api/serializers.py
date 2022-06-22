@@ -30,7 +30,6 @@ class CardSerializer(serializers.ModelSerializer):
             'score',
             'deque',
             'answers',
-            'correct_answer',
         ]
 
 
