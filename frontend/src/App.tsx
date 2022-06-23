@@ -11,8 +11,8 @@ const ToDos = lazy(() => import('./pages/To-Dos'));
 const Starred = lazy(() => import('./pages/Starred'));
 
 // ? Components import
-import Navbar from './Navbar';
-import Sidebar from './Sidbar';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 
 const App: Component = () => {
 	return (

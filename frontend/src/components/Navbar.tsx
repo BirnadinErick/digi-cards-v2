@@ -1,6 +1,6 @@
 import { Link } from 'solid-app-router';
 import { Component } from 'solid-js';
-import UserAvatar from './components/UserAvatar';
+import UserAvatar from './UserAvatar';
 
 const Navbar: Component = () => {
 	return (
