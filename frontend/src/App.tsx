@@ -26,7 +26,7 @@ const App: Component = () => {
 						<Route path='/my-profile' element={<MyProfile />} />
 						<Route path='/my-team' element={<MyTeam />} />
 						<Route path='/deques' element={<Deques />} />
-						<Route path='/deque/:id' element={<Deque />} />
+						<Route path='/deque/:slug' element={<Deque />} />
 						<Route path='/todos' element={<ToDos />} />
 						<Route path='/starred' element={<Starred />} />
 					</Routes>
