@@ -90,7 +90,11 @@ const Deques: Component = () => {
 													</div>
 												</div>
 												<div class='card-actions justify-start'>
-													<Link href={`/deque/${deque.id}`}>
+													<Link
+														href={`/deque/${deque.title
+															.toLowerCase()
+															.slice(0, 64)}?i=${deque.id}&t=${deque.time}`}
+													>
 														<div class='btn btn-warning mb-4 ml-8 hover:scale-105 transition duration-200 ease-out hover:bg-white'>
 															Play Deque
 														</div>
