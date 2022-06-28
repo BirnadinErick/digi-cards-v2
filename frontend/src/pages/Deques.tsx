@@ -57,7 +57,7 @@ const Deques: Component = () => {
 												<figure>
 													<img
 														class='hover:scale-105 transition duration-300 ease-in-out'
-														src='https://api.lorem.space/image/fashion'
+														src='https://api.lorem.space/image/car'
 														alt='Shoes'
 													/>
 												</figure>

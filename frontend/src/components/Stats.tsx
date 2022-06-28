@@ -1,7 +1,9 @@
 import { Component } from 'solid-js';
 import DequeSVG from '../assets/deque_home_icon.svg';
 
-const Stats: Component = () => {
+const Stats: Component<{ respect: number; d_master: number; rank: number }> = (
+	props
+) => {
 	return (
 		<div class='my-8 flex justify-center bg-accent p-8 rounded-xl'>
 			<div class='stats stats-vertical lg:stats-horizontal shadow'>
@@ -22,14 +24,14 @@ const Stats: Component = () => {
 						</svg> */}
 					</div>
 					<div class=' text-black dark:text-white font-mono'>Total Respect</div>
-					<div class='stat-value text-primary'>25.6K</div>
+					<div class='stat-value text-primary'>{props.respect}</div>
 					<div class='stat-desc text-primary'>You are killing it 🔥</div>
 				</div>
 
 				<div class='stat'>
 					<div class='stat-figure text-secondary'></div>
 					<div class='text-black dark:text-white font-mono'>Deque Masters</div>
-					<div class='stat-value text-secondary'>26987452</div>
+					<div class='stat-value text-secondary'> {props.d_master} </div>
 					<div class='stat-desc text-secondary'>first 10 global spot</div>
 				</div>
 
@@ -57,7 +59,7 @@ const Stats: Component = () => {
 						</div>
 					</div>
 					<div class='text-black dark:text-white font-mono'>Rank</div>
-					<div class='stat-value text-error'>Script Kiddie</div>
+					<div class='stat-value text-error'>{props.rank}</div>
 					<div class='stat-desc text-error'>
 						Keep on goin', you can do it 👍
 					</div>

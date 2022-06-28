@@ -20,7 +20,11 @@ const Navbar: Component = () => {
 				</div>
 				<div class='dropdown dropdown-end mr-2'>
 					<label tabindex='0' class='btn btn-ghost btn-circle avatar'>
-						<UserAvatar w={10} m={0} />
+						<UserAvatar
+							w={10}
+							m={0}
+							src={'https://api.lorem.space/image/car'}
+						/>
 					</label>
 					<ul
 						tabindex='0'
