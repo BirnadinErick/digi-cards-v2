@@ -2,7 +2,7 @@ import axios from 'axios';
 import { BASEURL } from './constants';
 
 function getDeque(id: number) {
-	const response = axios({
+	return axios({
 		baseURL: BASEURL,
 		url: `/deques/${id}`,
 		method: 'GET',
@@ -15,7 +15,6 @@ function getDeque(id: number) {
 		.catch((e) => {
 			console.error(e);
 		});
-	return response;
 }
 
 export default getDeque;
