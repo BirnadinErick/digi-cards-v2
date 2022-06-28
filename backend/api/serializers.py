@@ -28,7 +28,6 @@ class CardSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'question',
-            'score',
             'deque',
             'answers',
         ]
