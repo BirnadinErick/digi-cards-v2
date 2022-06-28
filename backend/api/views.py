@@ -6,8 +6,8 @@ from rest_framework.authentication import BasicAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from knox.views import LoginView as KnoxLoginView
-from api.models import Card, Deque
-from api.serializers import CardSerializer, DequeSerializer, UserSerializer
+from api.models import Card, Deque, Profile
+from api.serializers import CardSerializer, DequeSerializer, ProfileSerializer, UserSerializer
 from api.permissions import IsOwner
 
 
@@ -47,6 +47,12 @@ class DequeViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
 
 class LoginView(KnoxLoginView):

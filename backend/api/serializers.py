@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from api.models import Card, Deque
+from api.models import Card, Deque, Profile
 
 
 class DequeSerializer(serializers.ModelSerializer):
@@ -35,7 +35,14 @@ class CardSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     deques = serializers.PrimaryKeyRelatedField(many=True, queryset=Deque.objects.all())
+    profile = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'deques']
+        fields = ['id', 'username', 'deques', 'profile']
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['username', 'note', 'avatar', 'respect', 'rank']

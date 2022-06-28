@@ -1,12 +1,13 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from api.views import DequeValidation, UserViewSet, DequeViewSet, CardsView
+from api.views import DequeValidation, ProfileViewSet, UserViewSet, DequeViewSet, CardsView
 from knox.views import LogoutAllView
 from api.views import LoginView
 
 router = DefaultRouter()
 router.register(r'deques', DequeViewSet, basename="deques")
 router.register(r'users', UserViewSet, basename="users")
+router.register(r'profiles', ProfileViewSet, basename="profiles")
 
 urlpatterns = [
     path('', include(router.urls)),
