@@ -3,7 +3,7 @@ import setUserToken from './authenticateUser';
 
 const retryKey = 'retryDeque';
 
-async function getDeques(url: string, t: string | null) {
+async function getDequesCore(url: string, t: string | null) {
 	try {
 		const { data, status } = await axios.get(url, {
 			headers: {
@@ -26,7 +26,7 @@ async function getDeques(url: string, t: string | null) {
 				console.log('retrying after 401 fail...');
 				sessionStorage.setItem(retryKey, '1');
 				setUserToken('http://localhost:4009/api/login/', true).then(
-					await getDeques(url, sessionStorage.getItem('t'))
+					await getDequesCore(url, sessionStorage.getItem('t'))
 				);
 			}
 			sessionStorage.removeItem(retryKey);
@@ -35,5 +35,12 @@ async function getDeques(url: string, t: string | null) {
 		}
 	}
 }
+
+const getDeques = async () => {
+	return await getDequesCore(
+		'http://localhost:4009/api/deques/',
+		sessionStorage.getItem('t')
+	);
+};
 
 export default getDeques;

@@ -4,16 +4,8 @@ import type { DequeT } from '../utils/types';
 import getDeques from '../utils/getDeques';
 import LoadingBar from '../components/LoadingBar';
 
-// createResource wrapper for getDeques()
-const getDequesWrapper = async () => {
-	return await getDeques(
-		'http://localhost:4009/api/deques/',
-		sessionStorage.getItem('t')
-	);
-};
-
 const Deques: Component = () => {
-	const [deques] = createResource(getDequesWrapper);
+	const [deques] = createResource(getDeques);
 
 	return (
 		<>
@@ -93,7 +85,7 @@ const Deques: Component = () => {
 													<Link
 														href={`/deque/${deque.title
 															.toLowerCase()
-															.slice(0, 64)}?i=${deque.id}&t=${deque.time}`}
+															.slice(0, 64)}?i=${deque.id}`}
 													>
 														<div class='btn btn-warning mb-4 ml-8 hover:scale-105 transition duration-200 ease-out hover:bg-white'>
 															Play Deque

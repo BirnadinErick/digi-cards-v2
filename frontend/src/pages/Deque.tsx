@@ -7,44 +7,22 @@ import {
 	Show,
 	For,
 } from 'solid-js';
-import { useSearchParams } from 'solid-app-router';
+import { Link, useSearchParams } from 'solid-app-router';
 import getCards from '../utils/getCards';
 import LoadingBar from '../components/LoadingBar';
 import { CardT } from '../utils/types';
+import axios from 'axios';
+import { BASEURL } from '../utils/constants';
+import getDeque from '../utils/getDeque';
 
 // components
 const DequeMeta = lazy(() => import('../components/DequeMeta'));
-
-// components
-const CompletedCards: Component<{ doneCount: number; total: number }> = (
-	props
-) => {
-	return (
-		<div class='bg-white rounded-md p-4'>
-			<p class='uppercase font-2xl text-center cursor-help font-noto text-black'>
-				{props.doneCount} of {props.total} Cards Answered
-			</p>
-		</div>
-	);
-};
-
-const Timer: Component<{ seconds: number }> = (props) => {
-	return (
-		<div class='my-4 bg-accent rounded-xl cursor-progress p-4 text-black font-bold text-2xl text-center font-prata'>
-			<p>{new Date(props.seconds * 1000).toISOString().substring(11, 19)}</p>
-		</div>
-	);
-};
-
-const ActionButtons: Component<{ styles: Array<string>; text: string }> = (
-	props
-) => {
-	return (
-		<div class={`deque-action-btn hover:font-bold ${props.styles.join(' ')}`}>
-			<p>{props.text}</p>
-		</div>
-	);
-};
+const Timer = lazy(() => import('../components/DequeTimer'));
+const Card = lazy(() => import('../components/DigiCard'));
+const DequeActionButton = lazy(() => import('../components/DequeActions'));
+const CompletedCards = lazy(
+	() => import('../components/CompletedCardsCounter')
+);
 
 const Deque: Component = () => {
 	const [urlkwargs, _] = useSearchParams(); // get neccessary data from url
@@ -53,15 +31,9 @@ const Deque: Component = () => {
 	// signals
 	const [answers, setAnswers] = createSignal(new Map<number, number>());
 	const [cardsDone, setCardDone] = createSignal(0);
-	const [seconds, setSeconds] = createSignal(parseInt(urlkwargs.t));
-
-	// answer click handler
-	function onClickAnswer(aid: number, cid: number) {
-		if (answers().has(cid) !== true) {
-			setCardDone(cardsDone() + 1);
-		}
-		setAnswers(answers().set(cid, aid));
-	}
+	const [seconds, setSeconds] = createSignal(0);
+	const [score, setScore] = createSignal(0);
+	const [isModalVisible, setModalVisibility] = createSignal(false);
 
 	// createResource wrapper
 	async function getCardsWrapper() {
@@ -70,7 +42,15 @@ const Deque: Component = () => {
 			sessionStorage.getItem('t')
 		);
 	}
-	const [cards] = createResource(getCardsWrapper); // create resource
+
+	async function getDequeWrapper() {
+		const response = await getDeque(parseInt(urlkwargs.i));
+		setSeconds(response.time);
+		return response;
+	}
+
+	const [cards] = createResource(getCardsWrapper); // create resource cards
+	const [deque] = createResource(getDequeWrapper); // create resource deque
 
 	// register timer and set the PID in session storage to unregister
 	const timerPID = setInterval(() => {
@@ -84,90 +64,138 @@ const Deque: Component = () => {
 	}, 1000);
 	sessionStorage.setItem('timerPID', timerPID.toString()); // save PID to unregister
 
-	// setInterval(() => {
-	// 	console.log(answers());
-	// 	console.log(cards());
-	// }, 5 * 1000);
+	// submit answers
+	function submitDeque(ans: Function) {
+		var final_answers = {
+			answers: Object.fromEntries(ans()),
+		};
+
+		axios({
+			baseURL: BASEURL,
+			url: '/validate-deque',
+			method: 'POST',
+			headers: { Authorization: `T ${sessionStorage.getItem('t')}` },
+			responseType: 'json',
+			data: final_answers,
+		})
+			.then((response) => {
+				setScore(response.data.score);
+				setModalVisibility(true);
+			})
+			.catch((e) => {
+				console.error(e);
+			});
+	}
+
+	// answer click handler
+	function onClickAnswer(aid: number, cid: number) {
+		if (answers().has(cid) !== true) {
+			setCardDone(cardsDone() + 1);
+		}
+		setAnswers(answers().set(cid, aid));
+	}
 
 	return (
-		<div class='flex justify-between'>
-			<main class='w-full mx-4 py-4'>
-				<DequeMeta />
-				<Suspense fallback={<LoadingBar />}>
-					<Show when={cards()}>
-						<For each={cards()}>
-							{(card: CardT, index) => {
-								return (
-									<div class='bg-base-300 p-4 rounded-lg mb-16'>
-										<h1 class='text-xl font-noto'>
-											<span class='font-prata font-xl font-bold italic'>
-												Qu.
-											</span>{' '}
-											{card.question}
-										</h1>
-
-										<div>
-											<For each={card.answers.split(',')}>
-												{(answer, answer_index) => {
-													return (
-														<>
-															<div class='form-control bg-black p-2 rounded-lg text-white my-4'>
-																<label class='label cursor-pointer'>
-																	<span class=' text-md font-noto'>
-																		{answer}
-																	</span>
-																	<input
-																		value={answer_index().toString()}
-																		type='radio'
-																		name={`radio-${index()}`}
-																		class='radio border-error radio-accent checked:bg-accent'
-																		onInput={() => {
-																			onClickAnswer(
-																				answer_index() + 1,
-																				card.id
-																			);
-																		}}
-																	/>
-																</label>
-															</div>
-														</>
-													);
-												}}
-											</For>
-										</div>
-									</div>
-								);
-							}}
-						</For>
-					</Show>
-				</Suspense>
-			</main>
-
-			<div class='ml-8 my-2 w-2/5 mt-64'>
-				<div class='mt-2 bg-base-300 rounded-lg p-8 cursor-default fixed'>
-					<Suspense
-						fallback={<CompletedCards doneCount={cardsDone()} total={2003} />}
-					>
-						<Show when={cards()}>
-							<CompletedCards doneCount={cardsDone()} total={cards().length} />
+		<>
+			<input type='checkbox' id='my-modal' class='modal-toggle' />
+			<div class={`modal ${isModalVisible() === false ? '' : 'modal-open'}`}>
+				<div class='modal-box'>
+					<h3 class='font-bold text-lg'>Congrats! 🎉</h3>
+					<Suspense fallback={<p>Submit to get score!</p>}>
+						<Show when={deque()}>
+							<p class='py-4 font-noto'>
+								You scored{' '}
+								<span class='font-prata font-2xl underline text-info'>
+									{score()}
+								</span>{' '}
+								for deque{' '}
+								<span class='text-accent uppercase mx-2 font-prata'>
+									{deque().title}
+								</span>
+							</p>
 						</Show>
 					</Suspense>
-
-					<Timer seconds={seconds()} />
-
-					<div class='mt-8'>
-						<ActionButtons
-							styles={['bg-success', 'hover:bg-white']}
-							text='Submit Deque'
-						/>
-						<ActionButtons
-							styles={['hover:bg-black', 'text-white', 'bg-error']}
-							text='Quit Deque'
-						/>
+					<div class='modal-action'>
+						<Link href='/deques'>
+							<DequeActionButton
+								styles={['text-black', 'bg-info']}
+								text='Conquer more Deques ⚔️'
+								onClick={console.log}
+							/>
+						</Link>
 					</div>
 				</div>
 			</div>
-		</div>
+			<div class='flex justify-between'>
+				<main class='w-full mx-4 py-4'>
+					<Suspense fallback={<LoadingBar />}>
+						<Show when={deque()}>
+							<DequeMeta
+								title={deque().title}
+								category={deque().category}
+								created_by={deque().owner}
+								deque_master={deque().deque_master}
+								sidenote={deque().sidenote}
+							/>
+						</Show>
+					</Suspense>
+
+					{/* deque cards */}
+					<Suspense fallback={<LoadingBar />}>
+						<Show when={cards()}>
+							<For each={cards()}>
+								{(card: CardT, index) => {
+									return (
+										<Card
+											card={card}
+											index={index()}
+											onClickAnswer={onClickAnswer}
+										/>
+									);
+								}}
+							</For>
+						</Show>
+					</Suspense>
+				</main>
+
+				<div class='ml-8 my-2 w-2/5 mt-64'>
+					<div class='mt-2 bg-base-300 rounded-lg p-8 cursor-default fixed'>
+						<Suspense
+							fallback={<CompletedCards doneCount={cardsDone()} total={2003} />}
+						>
+							<Show when={cards()}>
+								<CompletedCards
+									doneCount={cardsDone()}
+									total={cards().length}
+								/>
+							</Show>
+						</Suspense>
+
+						<Timer seconds={seconds()} />
+
+						<div class='mt-8'>
+							<DequeActionButton
+								styles={['bg-success', 'hover:bg-white']}
+								text='Submit Deque'
+								onClick={() => {
+									submitDeque(answers);
+								}}
+							/>
+							{/* <label for='my-modal' class='hover:font-bold bg-success hover:bg-white'>
+								open modal
+							</label> */}
+							<Link href='/deques'>
+								<DequeActionButton
+									styles={['hover:bg-black', 'text-white', 'bg-error']}
+									text='Quit Deque'
+									onClick={console.log}
+								/>
+							</Link>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
 	);
 };
 
